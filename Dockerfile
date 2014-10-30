@@ -12,8 +12,37 @@ RUN \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get install -y && \
-  apt-get install -y curl git unzip vim wget && \
-  curl -sSL http://deis.io/deis-cli/install.sh | sh -s 0.14.1 && mv deis /usr/local/bin && echo "install deis into /usr/local/bin"
+  apt-get install -y curl git unzip vim wget
+
+RUN \
+  curl -sSL http://deis.io/deis-cli/install.sh | sh -s 0.14.1 && \
+  mv ./deis /usr/local/bin && \
+  echo "Installed deis to /usr/local/bin"
+
+RUN \
+  curl -sSL http://deis.io/deisctl/install.sh | sh -s 0.14.1 && \
+  mv ./deisctl /usr/local/bin && \
+  echo "Installed deisctl to /usr/local/bin"
+
+RUN \
+  wget https://github.com/coreos/fleet/releases/download/v0.8.3/fleet-v0.8.3-linux-amd64.tar.gz && \
+  tar -zxvf fleet-v0.8.3-linux-amd64.tar.gz && \
+  mv fleet-v0.8.3-linux-amd64/fleetctl /usr/local/bin && \
+  rm -rf fleet-v0.8.3-linux-amd64.tar.gz fleet-v0.8.3-linux-amd64 && \
+  echo "Installed fleetctl to /usr/local/bin"
+
+# Create a mount point
+VOLUME [ "/root/private_keys" ]
+
+RUN \
+  mkdir -p /root/.ssh && \
+  ls /root/private_keys | xargs -I FILE ln -s /root/private_keys/FILE /root/.ssh/FILE
+
+# Set environment variables.
+ENV HOME /root
+
+# Define working directory.
+WORKDIR /root
 
 # Define default command.
-CMD ["bash"]
+CMD [ "bash" ]
