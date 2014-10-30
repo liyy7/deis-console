@@ -18,10 +18,11 @@ Deis Console Dockerfile
 		* `docker run --rm -it -v $HOME/.ssh:/root/private_keys yongyulee/docker-console:v0.14.1`
 * Configure environment variables
 	* example
-		* `docker run --rm -it -e "DEIS_CONTROLLER=http://deis.domain.com" -e "DEIS_USERNAME=<USERNAME>" -e "DEIS_PASSWORD=<PASSWORD>" -e "DEISCTL_TUNNEL=deisctl-tunnel.domain.com" -v $HOME/.ssh:/root/private_keys yongyulee/docker-console:latest`
+		* `docker run --rm -it -e "DEIS_CONTROLLER=http://deis.domain.com" -e "DEIS_USERNAME=<USERNAME>" -e "DEIS_PASSWORD=<PASSWORD>" -e "DEISCTL_TUNNEL=deisctl-tunnel.domain.com" -e "FLEETCTL_TUNNEL=deisctl-tunnel.domain.com" -v $HOME/.ssh:/root/private_keys yongyulee/docker-console:latest`
 			* Inside container:
 				* `deis login $DEIS_CONTROLLER --username=$DEIS_USERNAME --password=$DEIS_PASSWORD`
-                * Don't forget to run `/root/link_private_keys.sh` before you use `deisctl` or `fleetctl`
+                * Before using `deisctl` or `fleetctl`, add necessary private key (make sure you have your private key for `deis` in path $HOME/.ssh)
+                	* `ssh-add /root/private_keys/<DEIS_PRIVATE_KEY>`
 
 ###### Available commands
 * `deis`

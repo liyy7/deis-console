@@ -33,10 +33,11 @@ RUN \
   rm -rf fleet-v0.8.3-linux-amd64.tar.gz fleet-v0.8.3-linux-amd64 && \
   echo "Installed fleetctl to /usr/local/bin"
 
+# Enable `ssh-add`
+RUN echo 'eval `ssh-agent -s`' >> ~/.bashrc
+
 # Create a mount point
 VOLUME [ "/root/private_keys" ]
-
-ADD link_private_keys.sh /root/
 
 # Set environment variables.
 ENV HOME /root
