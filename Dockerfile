@@ -7,6 +7,8 @@
 # Pull base image.
 FROM ubuntu:14.04
 
+MAINTAINER Yongyu Lee <aleeyyu@gmail.com>
+
 # Install.
 RUN \
   apt-get update && \
@@ -34,9 +36,7 @@ RUN \
 # Create a mount point
 VOLUME [ "/root/private_keys" ]
 
-RUN \
-  mkdir -p /root/.ssh && \
-  ls /root/private_keys | xargs -I FILE ln -s /root/private_keys/FILE /root/.ssh/FILE
+ADD link_private_keys.sh /root
 
 # Set environment variables.
 ENV HOME /root
