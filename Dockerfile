@@ -36,7 +36,7 @@ RUN \
 # Create a mount point
 VOLUME [ "/root/private_keys" ]
 
-ADD link_private_keys.sh /root
+ADD link_private_keys.sh /root/
 
 # Set environment variables.
 ENV HOME /root
