@@ -17,20 +17,20 @@ RUN \
   apt-get install -y curl git unzip vim wget
 
 RUN \
-  curl -sSL http://deis.io/deis-cli/install.sh | sh -s 0.14.1 && \
+  curl -sSL http://deis.io/deis-cli/install.sh | sh -s 1.4.1 && \
   mv ./deis /usr/local/bin && \
   echo "Installed deis to /usr/local/bin"
 
 RUN \
-  curl -sSL http://deis.io/deisctl/install.sh | sh -s 0.14.1 && \
+  curl -sSL http://deis.io/deisctl/install.sh | sh -s 1.4.1 && \
   mv ./deisctl /usr/local/bin && \
   echo "Installed deisctl to /usr/local/bin"
 
 RUN \
-  wget https://github.com/coreos/fleet/releases/download/v0.8.3/fleet-v0.8.3-linux-amd64.tar.gz && \
-  tar -zxvf fleet-v0.8.3-linux-amd64.tar.gz && \
-  mv fleet-v0.8.3-linux-amd64/fleetctl /usr/local/bin && \
-  rm -rf fleet-v0.8.3-linux-amd64.tar.gz fleet-v0.8.3-linux-amd64 && \
+  wget https://github.com/coreos/fleet/releases/download/v0.9.0/fleet-v0.9.0-linux-amd64.tar.gz && \
+  tar -zxvf fleet-v0.9.0-linux-amd64.tar.gz && \
+  mv fleet-v0.9.0-linux-amd64/fleetctl /usr/local/bin && \
+  rm -rf fleet-v0.9.0-linux-amd64.tar.gz fleet-v0.9.0-linux-amd64 && \
   echo "Installed fleetctl to /usr/local/bin"
 
 # Enable `ssh-add`
